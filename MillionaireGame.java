@@ -7,7 +7,7 @@ public class MillionaireGame {
         Scanner input = new Scanner(System.in);
         boolean done = false;
         boolean nextQ = true;
-        int level = 0;
+        int level = 1;
         int i = 0;
         boolean[] chosen = {true,false,false,false,false,false,false,false,false
           ,false,false,false,false,false,false,false,false,false,false,false,false
@@ -20,7 +20,7 @@ public class MillionaireGame {
         boolean availableFriend = true;
         boolean availableAudience = true;
         while (!done) {
-            if (level == 15) {
+            if (level == 16) {
                 done = true;
                 System.out.println("Congratulations! You are a millionaire!");
             } else {
@@ -34,7 +34,6 @@ public class MillionaireGame {
                         i = (int)(Math.random() * range) + min;
                     }
                     chosen[i]= true;
-                    level++;
                 }
                 System.out.println("");
                 System.out.println("level: " + level);
@@ -50,6 +49,7 @@ public class MillionaireGame {
                     if (userAnswer==answer){
                         System.out.println("Correct!");
                         System.out.println("You curently have: $" + getWinnings(level));
+                        level++;
                         nextQ = true;
                         answer = 0;
                     } else {

@@ -5,22 +5,21 @@ import java.util.Random;
 public class MillionaireGame {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Random r = new Random();
         boolean done = false;
         boolean nextQ = true;
         int level = 0;
         int i = 0;
-        boolean[] chosen = {true,false,false,false,false,false,false,false,false
-          ,false,false,false,false,false,false,false,false,false,false,false,false
-          ,false,false,false,false,false,false,false,false,false,false};
+        boolean[] chosen = {true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
         int userResponce = 0;
         int answer = 0;
-        int userAnswer = -1;
+        int userAnswer = 0;
 
         boolean availableHalf = true;
         boolean availableFriend = true;
         boolean availableAudience = true;
-        while (!done) {
-            if (level == 15) {
+        while (done == false) {
+            if (level == 16 && userAnswer == answer) {
                 done = true;
                 System.out.println("Congratulations! You are a millionaire!");
             } else {
@@ -36,74 +35,74 @@ public class MillionaireGame {
                     chosen[i]= true;
                     level++;
                 }
-                System.out.println("");
-                System.out.println("level: " + level);
-                answer = displayQuestion(i);
-                displayMenu();
-                userResponce = input.nextInt();
+                if (level!=16){
+                    System.out.println("");
+                    System.out.println("level: " + level);
+                    answer = displayQuestion(i);
+                    displayMenu();
+                }
             }
-            if(!done){
-                if (userResponce==1){
-                    System.out.println("OK. Please provide answer (1-4): ");
-                    System.out.println("Answer is: " + answer);
-                    userAnswer = input.nextInt();
-                    if (userAnswer==answer){
-                        System.out.println("Correct!");
-                        System.out.println("You curently have: $" + getWinnings(level));
-                        nextQ = true;
-                        answer = 0;
-                    } else {
-                        done = true;
-                        if (level>10){
-                            System.out.println("Sorry, that is incorrect. You won: $32000");
-                        } else if (level>5){
-                            System.out.println("Sorry, that is incorrect. You won: $1000");
-                        }else{
-                            System.out.println("Sorry, that is incorrect. You lost");
-                        }
-                    }
-                  } else if (userResponce==2) {
-                        if (availableHalf){
-                            remove2Wrong(answer);
-                            availableHalf = false;
-                            nextQ = false;
-                        } else {
-                            System.out.println("You have already used this lifeline");
-                            nextQ = false;
-                        }
-                  }
-                  else if (userResponce==3) {
-                    if (availableFriend){
-                        System.out.println("Ask a friend Lifeline");
-                        provideHint(answer);
-                        availableFriend = false;
-                        nextQ = false;
-                    } else {
-                        System.out.println("You have already used this lifeline");
-                        nextQ = false;
-                    }
-                  }
-                  else if (userResponce==4) {
-                    if (availableAudience){
-                        System.out.println("Ask a audience Lifeline");
-                        provideHint(answer);
-                        availableAudience = false;
-                        nextQ = false;
-                    } else {
-                        System.out.println("You have already used this lifeline");
-                        nextQ = false;
-                    }
-                  }
-                  else if (userResponce==5) {
-                    nextQ = false;
+            userResponce = input.nextInt();
+            if (userResponce==1){
+                System.out.println("OK. Please provide answer (1-4): ");
+                System.out.println("Answer is: " + answer);
+                userAnswer = input.nextInt();
+                if (userAnswer==answer){
+                    System.out.println("Correct!");
+                    System.out.println("You curently have: $" + getWinnings(level));
+                    nextQ = true;
+                    answer = 0;
+                } else {
                     done = true;
-                    System.out.println("Bye. You won: $" + getWinnings(level-1));
-                  }else{
-                    System.out.println("Invalid input. Please try again");
+                    if (level>10){
+                        System.out.println("Sorry, that is incorrect. You won: $32000");
+                    } else if (level>5){
+                        System.out.println("Sorry, that is incorrect. You won: $1000");
+                    }else{
+                        System.out.println("Sorry, that is incorrect. You lost");
+                    }
+                }
+              } else if (userResponce==2) {
+                    if (availableHalf){
+                        remove2Wrong(answer);
+                        availableHalf = false;
+                        nextQ = false;
+                    } else {
+                        System.out.println("You have already used this lifeline");
+                        nextQ = false;
+                    }
+              }
+              else if (userResponce==3) {
+                if (availableFriend){
+                    System.out.println("Ask a friend Lifeline");
+                    provideHint(answer);
+                    availableFriend = false;
                     nextQ = false;
-                  }
-            }
-            }
+                } else {
+                    System.out.println("You have already used this lifeline");
+                    nextQ = false;
+                }
+              }
+              else if (userResponce==4) {
+                if (availableAudience){
+                    System.out.println("Ask a audience Lifeline");
+                    provideHint(answer);
+                    availableAudience = false;
+                    nextQ = false;
+                } else {
+                    System.out.println("You have already used this lifeline");
+                    nextQ = false;
+                }
+              }
+              else if (userResponce==5) {
+                nextQ = false;
+                done = true;
+                System.out.println("Bye. You won: $" + getWinnings(level-1));
+              }else{
+                System.out.println("Invalid input. Please try again");
+                nextQ = false;
+              }
+        }
     }
         public static void displayMenu(){
             System.out.println("");
